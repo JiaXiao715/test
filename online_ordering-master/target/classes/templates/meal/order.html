@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8" />
+ <title>下单</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{/style/style.css}" rel="stylesheet" type="text/css" />
+ <link th:href="@{/style/bootstrap.btn.css}" rel="stylesheet">
+ <script type="text/javascript" th:src="@{/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jqpublic.js}"></script>
+<!--
+Author: DeathGhost
+Author URI: http://www.deathghost.cn
+-->
+</head>
+<body>
+<!--引用头部导航栏代码块-->
+<div th:replace="~{commons/common::top}"></div>
+
+<!--Start content-->
+<section class="Psection MT20" id="Cflow">
+<!--如果用户未添加收货地址，则显示如下-->
+ <div class="confirm_addr_f">
+
+<!--配送方式及支付，则显示如下-->
+<!--check order or add other information-->
+ <div class="pay_delivery">
+  <span class="flow_title">配送方式：</span>
+  <table>
+   <th width="10%"></th>
+   <th width="25%">配送方式</th>
+   <th width="25%">运费</th>
+   <th width="40%">说明</th>
+   <tr>
+    <td></td>
+    <td>送货上门</td>
+    <td>￥0.00</td>
+    <td>配送说明信息...</td>
+   </tr>
+  </table>
+  <span class="flow_title">在线支付方式：</span>
+   <form>
+    <ul>
+    <li><input type="radio" name="pay" id="alipay" value="alipay" /><label for="alipay"><i class="alipay"></i></label></li>
+    </ul>
+   </form>
+  </div>
+
+  <div class="inforlist">
+  <form action="#">
+   <span class="flow_title">商品清单</span>
+   <table>
+    <th class="tb1_td5">名称</th>
+    <th class="tb1_td5">数量</th>
+    <th class="tb1_td5">价格</th>
+    <th class="tb1_td5">小计</th>
+   </table>
+   <table th:each="cart:${carts}">
+    <tr th:each="meal:${meals}" th:if="${cart.getMeal_id()==meal.getMeal_id()}">
+     <td class="tb1_td5">[[${meal.getMeal_name()}]]</td>
+     <td class="tb1_td5">[[${cart.getCount()}]]</td>
+     <td class="tb1_td5">[[${meal.getMeal_price()}]]</td>
+     <td class="tb1_td5">[[${cart.getPrice()}]]</td>
+    </tr>
+   </table>
+  </form>
+
+  <span class="flow_title">收货人信息：</span>
+  <form method="post" th:action="@{/order/submit}">
+   <table>
+    <!--隐藏提交user_id,order_price-->
+    <input hidden type="text" name="order_price" th:value="${sum}">
+    <input hidden type="text" name="user_id" th:value="${user.getUser_id()}">
+    <tr>
+     <td width="40%" align="right">*收货人姓名：</td>
+     <td><input type="text" name="order_name" th:value="${user.getTruename()}" required></td>
+    </tr>
+    <tr>
+     <td width="40%" align="right">*手机号：</td>
+     <td><input type="text" name="order_phone" th:value="${user.getPhone()}" required></td>
+    </tr>
+    <tr>
+     <td width="40%" align="right">*详细地址：</td>
+     <td><input type="text" name="order_address" th:value="${user.getAddress()}" required></td>
+    </tr>
+    <tr>
+     <td width="40%" align="right">下单时间：</td>
+     <td><input  type="text" name="order_time" th:value="${date}" readonly="readonly" style="border:none;"></td>
+    </tr>
+   </table>
+    <div class="Order_M">
+     <p><em>订单附言:</em><input name="order_state"  type="text"></p>
+     <p><em>优惠券:</em>
+     <select name="">
+      <option>￥10元优惠券</option>
+     </select>
+     </p>
+    </div>
+    <div class="Sum_infor">
+    <p class="p1">配送费用：￥0.00+商品费用：￥177.00-优惠券：￥10.00</p>
+    <p class="p2">合计：<span>[[${sum}]]</span></p>
+    <input type="submit" value="提交订单"  class="p3button"/>
+    </div>
+   </form>
+ </div>
+ </div>
+</section>
+
+<!--End content-->
+<!--引用底部栏代码块-->
+<div th:replace="~{commons/common::last}"></div>
+</body>
+</html>

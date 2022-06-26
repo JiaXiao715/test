@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mine.dao.MealSeriesMapper">
+
+    <select id="queryAllSeries" resultType="Meal_series">
+        select *from meal_series
+    </select>
+
+    <select id="getSeriesById" resultType="Meal_series" parameterType="int">
+        select *from meal_series where series_id=#{id}
+    </select>
+
+</mapper>

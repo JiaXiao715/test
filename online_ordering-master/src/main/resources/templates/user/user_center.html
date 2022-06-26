@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8" />
+ <title>用户中心</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{/style/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/style/bootstrap.btn.css}" rel="stylesheet">
+ <script type="text/javascript" th:src="@{/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jqpublic.js}"></script>
+<!--
+Author: DeathGhost
+Author URI: http://www.deathghost.cn
+-->
+</head>
+<body>
+<!--引用头部导航栏代码块-->
+<div th:replace="~{commons/common::top}"></div>
+
+<!--Start content-->
+<section class="Psection MT20">
+    <!--引用侧边导航栏代码块-->
+    <div th:replace="~{commons/common::nav_user}"></div>
+
+ <article class="U-article Overflow">
+  <!--"引用“user_page/user_index.html”"-->
+  <section class="usercenter">
+   <span class="Weltitle Block Font16 CorRed FontW Lineheight35">Welcome欢迎您！</span>
+   <div class="U-header MT20 Overflow">
+    <!--<img src="upload/testuser.jpg">-->
+
+    <p class="Font12" th:text="${msg_update}" th:if="${not #strings.isEmpty(msg_update)}"></p>
+    <p class="Font14 FontW" style="color: #00ac40">[[${user.getUsername()}]]</p>
+    <p class="Font12" >邮箱: [[${user.getEmail()}]]</p>
+    <p class="Font12" >姓名: [[${user.getTruename()}]]</p>
+    <p class="Font12" >电话: [[${user.getPhone()}]]</p>
+    <p class="Font12" >地址: [[${user.getAddress()}]]</p>
+    <p><a class="btn btn-success btn-sm" th:href="@{/user/update/{name}(name=${user.getUsername()})}">修改个人信息</a></p>
+
+    <p class="Font12 CorRed FontW">我的优惠券( 0 ) | 我的积分( 0 )</p>
+   </div>
+    <ul class="s-States Overflow FontW" id="Lbn">
+     <li class="Font14 FontW">业务提醒：</li>
+     <li><a href="#">待付款( 0 )</a></li>
+     <li><a href="#">待发货( 0 )</a></li>
+     <li><a href="#">待收货( 0 )</a></li>
+     <li><a href="#">待评价( 0 )</a></li>
+    </ul>
+  </section>
+ </article>
+</section>
+<!--End content-->
+<!--引用底部栏代码块-->
+<div th:replace="~{commons/common::last}"></div>
+</body>
+</html>

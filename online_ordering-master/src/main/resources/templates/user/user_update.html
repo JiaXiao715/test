@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8" />
+ <title>账户管理</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{/style/style.css}" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" th:src="@{/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{/js/jqpublic.js}"></script>
+ <!--
+ Author: DeathGhost
+ Author URI: http://www.deathghost.cn
+ -->
+</head>
+<body>
+<!--引用头部导航栏代码块-->
+<div th:replace="~{commons/common::top}"></div>
+<!--Start content-->
+<section class="Psection MT20">
+    <!--引用侧边导航栏代码块-->
+    <div th:replace="~{commons/common::nav_user}"></div>
+
+ <article class="U-article Overflow">
+  <!--user Account-->
+  <section class="AccManage Overflow">
+   <span class="AMTitle Block Font14 FontW Lineheight35">账户管理</span>
+
+   <form method="post" th:action="@{/user/update}">
+    <table>
+    <!--<tr>
+    <td width="30%" align="right">*修改头像：</td>
+    <td><input name="" type="file"><button>确定</button></td>
+    </tr>-->
+        <!--隐藏id,可以偷偷传到后端-->
+        <input hidden name="user_id" th:value="${user.getUser_id()}">
+    <tr>
+    <td width="30%" align="right">*用户名：</td>
+    <td><input type="text" name="username" th:value="${user.getUsername()}" required></td>
+    </tr>
+    <tr>
+        <td width="30%" align="right">*真实姓名：</td>
+        <td><input type="text" name="truename" th:value="${user.getTruename()}"></td>
+    </tr>
+    <tr>
+        <td width="30%" align="right">*密码：</td>
+        <td><input type="password" name="password" required></td>
+    </tr>
+    <tr>
+    <td width="30%" align="right">*邮箱：</td>
+    <td><input type="email" name="email" th:value="${user.getEmail()}"></td>
+    </tr>
+    <tr>
+    <td width="30%" align="right">*手机：</td>
+    <td><input type="tel" name="phone" th:value="${user.getPhone()}" required></td>
+    </tr>
+    <tr>
+        <td width="30%" align="right">*地址：</td>
+        <td><input type="text" name="address" th:value="${user.getAddress()}" required></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td><input name="" type="submit" value="保 存"></td>
+    </tr>
+    </table>
+   </form>
+  </section>
+ </article>
+</section>
+<!--End content-->
+<!--引用底部栏代码块-->
+<div th:replace="~{commons/common::last}"></div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>我的历史订单</title>
+    <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+    <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+    <meta name="author" content="DeathGhost"/>
+    <link th:href="@{/style/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/style/bootstrap.btn.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/public.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jqpublic.js}"></script>
+<!--
+Author: DeathGhost
+Author URI: http://www.deathghost.cn
+-->
+</head>
+<body>
+<!--引用头部导航栏代码块-->
+<div th:replace="~{commons/common::top}"></div>
+<!--Start content-->
+<section class="Psection MT20">
+    <!--引用侧边栏-->
+    <div th:replace="~{commons/common::nav_user}"></div>
+
+ <article class="U-article Overflow">
+  <!--user order list-->
+  <section>
+    <table class="Myorder">
+     <th class="Font14 FontW">订单编号</th>
+     <th class="Font14 FontW">下单时间</th>
+     <th class="Font14 FontW">收件人</th>
+     <th class="Font14 FontW">订单总金额</th>
+     <th class="Font14 FontW">联系电话</th>
+     <th class="Font14 FontW">操作</th>
+     <tr th:each="order:${orders}">
+      <td class="FontW"><a href="#" style="color: #00a73e">[[${order.getOrder_id()}]]</a></td>
+      <td>[[${order.getOrder_time()}]]</td>
+      <td>[[${order.getOrder_name()}]]</td>
+      <td class="FontW" style="color: #e53f0b">[[${order.getOrder_price()}]]</td>
+      <td>[[${order.getOrder_phone()}]]</td>
+      <td><a href="#">取消订单</a><a href="#"> | 支付</a></td>
+     </tr>
+    </table>
+    <div class="TurnPage">
+         <a href="#">
+          <span class="Prev"><i></i>首页</span>
+         </a>
+         <a href="#"><span class="PNumber">1</span></a>
+         <a href="#"><span class="PNumber">2</span></a>
+         <a href="#">
+         <span class="Next">最后一页<i></i></span>
+        </a>
+       </div>
+  </section>
+ </article>
+</section>
+<!--End content-->
+<!--引用底部栏代码块-->
+<div th:replace="~{commons/common::last}"></div>
+</body>
+</html>

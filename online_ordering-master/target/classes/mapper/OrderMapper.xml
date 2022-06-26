@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mine.dao.OrderMapper">
+
+    <insert id="addOrder" parameterType="Order">
+        insert into `order`(user_id,order_time, order_address, order_phone, order_price, order_state, order_name)
+        values (#{user_id},#{order_time},#{order_address},#{order_phone},
+                    #{order_price},#{order_state},#{order_name})
+    </insert>
+
+    <select id="queryAllOrder" resultType="Order" parameterType="int">
+        select *from `order` where user_id=#{user_id}
+    </select>
+
+    <select id="getOrderByOrderId" resultType="Order" parameterType="int">
+        select *from `order` where order_id=#{order_id}
+    </select>
+
+    <select id="getOrderByOrderTime" resultType="Order">
+        select *from `order` where order_time=#{order_time}
+    </select>
+</mapper>
